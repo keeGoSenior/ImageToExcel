@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(344, 260)
+        MainWindow.resize(399, 260)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -24,7 +24,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.image_link_Edit = QtWidgets.QLineEdit(self.centralwidget)
-        self.image_link_Edit.setGeometry(QtCore.QRect(95, 9, 181, 23))
+        self.image_link_Edit.setGeometry(QtCore.QRect(120, 10, 191, 23))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
@@ -35,7 +35,7 @@ class Ui_MainWindow(object):
         self.image_link_Edit.setText("")
         self.image_link_Edit.setObjectName("image_link_Edit")
         self.imagelink_label = QtWidgets.QLabel(self.centralwidget)
-        self.imagelink_label.setGeometry(QtCore.QRect(0, 9, 91, 22))
+        self.imagelink_label.setGeometry(QtCore.QRect(10, 9, 101, 22))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(12)
@@ -46,7 +46,7 @@ class Ui_MainWindow(object):
         self.imagelink_label.setAlignment(QtCore.Qt.AlignCenter)
         self.imagelink_label.setObjectName("imagelink_label")
         self.xlsx_file_edit = QtWidgets.QLineEdit(self.centralwidget)
-        self.xlsx_file_edit.setGeometry(QtCore.QRect(120, 209, 131, 23))
+        self.xlsx_file_edit.setGeometry(QtCore.QRect(150, 210, 131, 23))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
@@ -55,7 +55,7 @@ class Ui_MainWindow(object):
         self.xlsx_file_edit.setInputMask("")
         self.xlsx_file_edit.setObjectName("xlsx_file_edit")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(5, 209, 111, 22))
+        self.label_2.setGeometry(QtCore.QRect(5, 209, 141, 22))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(12)
@@ -66,7 +66,7 @@ class Ui_MainWindow(object):
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.made_by_label = QtWidgets.QLabel(self.centralwidget)
-        self.made_by_label.setGeometry(QtCore.QRect(0, 239, 341, 20))
+        self.made_by_label.setGeometry(QtCore.QRect(10, 239, 371, 20))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
@@ -75,14 +75,14 @@ class Ui_MainWindow(object):
         self.made_by_label.setAlignment(QtCore.Qt.AlignCenter)
         self.made_by_label.setObjectName("made_by_label")
         self.image_show_label = QtWidgets.QLabel(self.centralwidget)
-        self.image_show_label.setGeometry(QtCore.QRect(0, 40, 341, 161))
+        self.image_show_label.setGeometry(QtCore.QRect(20, 40, 361, 161))
         font = QtGui.QFont()
         font.setPointSize(20)
         self.image_show_label.setFont(font)
         self.image_show_label.setAlignment(QtCore.Qt.AlignCenter)
         self.image_show_label.setObjectName("image_show_label")
         self.transform_buttom = QtWidgets.QPushButton(self.centralwidget)
-        self.transform_buttom.setGeometry(QtCore.QRect(254, 210, 87, 21))
+        self.transform_buttom.setGeometry(QtCore.QRect(290, 210, 105, 21))
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
@@ -92,7 +92,7 @@ class Ui_MainWindow(object):
 "alternate-background-color: rgb(69, 70, 69);")
         self.transform_buttom.setObjectName("transform_buttom")
         self.unpload_buttom = QtWidgets.QPushButton(self.centralwidget)
-        self.unpload_buttom.setGeometry(QtCore.QRect(280, 10, 61, 21))
+        self.unpload_buttom.setGeometry(QtCore.QRect(320, 10, 71, 21))
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
@@ -123,7 +123,7 @@ class Ui_MainWindow(object):
     def add_functions(self):
         pass
 
-    def image_show(self, ):
+    def image_show(self):
         pass
 
     def image_upload(self):
