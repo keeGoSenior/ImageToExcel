@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from functions import *
 
 
 class Ui_MainWindow(object):
@@ -49,7 +50,8 @@ class Ui_MainWindow(object):
         font.setFamily("Arial")
         font.setPointSize(10)
         self.xlsx_file_edit.setFont(font)
-        self.xlsx_file_edit.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.xlsx_file_edit.setStyleSheet("background-color: rgb(255, 255, 255);gridline-color: rgb(255, 255, 67);\n"
+"selection-color: rgb(69, 255, 178);")
         self.xlsx_file_edit.setInputMask("")
         self.xlsx_file_edit.setObjectName("xlsx_file_edit")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
@@ -73,7 +75,14 @@ class Ui_MainWindow(object):
         self.made_by_label.setAlignment(QtCore.Qt.AlignCenter)
         self.made_by_label.setObjectName("made_by_label")
         self.image_show_label = QtWidgets.QLabel(self.centralwidget)
-        self.image_show_label.setGeometry(QtCore.QRect(20, 40, 361, 161))
+
+        # characteristics for the label which show image
+        self.label_x = 20
+        self.label_y = 40
+        self.label_width = 361
+        self.label_height = 161
+
+        self.image_show_label.setGeometry(QtCore.QRect(self.label_x, self.label_y, self.label_width, self.label_height))
         font = QtGui.QFont()
         font.setPointSize(20)
         self.image_show_label.setFont(font)
@@ -105,7 +114,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.add_functions()
+        self.add_functions(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -114,18 +123,18 @@ class Ui_MainWindow(object):
         self.imagelink_label.setText(_translate("MainWindow", "Image link:"))
         self.xlsx_file_edit.setPlaceholderText(_translate("MainWindow", "Example"))
         self.label_2.setText(_translate("MainWindow", ".xlsx file name:"))
-        self.made_by_label.setText(_translate("MainWindow", "Made by github/KeeGoSenior"))
+        self.made_by_label.setText(_translate("MainWindow", "Made by github/keeGoSenior"))
         self.image_show_label.setText(_translate("MainWindow", "🖼️"))
         self.transform_button.setText(_translate("MainWindow", "Transform"))
         self.upload_button.setText(_translate("MainWindow", "Upload"))
 
-    def add_functions(self):
+    def add_functions(self, MainWindow):
         self.upload_button.clicked.connect(self.image_upload)
-        self.transform_button.clicked.connect(self.transform)
+        self.transform_button.clicked.connect(lambda: self.transform(MainWindow))
 
     def image_show(self, image_link):
         pixmap = QtGui.QPixmap(image_link)
-        print('pixmap image:', pixmap)
+        self.image_label_scale()
         self.image_show_label.setPixmap(pixmap)
 
     def image_upload(self):
@@ -133,12 +142,22 @@ class Ui_MainWindow(object):
         print('image src:', self.src)
         self.image_show(self.src)
 
-    # Func for resizing the label to fit the aspect ratio of the photo
+    # Function for resizing the label to fit the aspect ratio of the photo
     def image_label_scale(self):
-        pass
+        image = cv2.imread(self.src)
+        width = len(image[0])
+        height = len(image)
+        ratio = width/height
+        label_width = self.label_height * ratio
+        label_x = self.label_x + round((self.label_width - label_width)/2)
+        self.image_show_label.setGeometry(QtCore.QRect(label_x, self.label_y, round(label_width), self.label_height))
 
-    def transform(self):
-        pass
+    def transform(self, MainWindow):
+        image = cv2.imread(self.src)
+        MainWindow.setWindowTitle("ImageToExcel - Creating...")
+        image_hex_list = rgb_to_hex(image)
+        image_to_excel_transform(self.xlsx_file_edit.text(), image_hex_list)
+        MainWindow.setWindowTitle("ImageToExcel - Completed ✔")
 
 
 if __name__ == "__main__":

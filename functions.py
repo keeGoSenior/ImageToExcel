@@ -4,18 +4,6 @@ from openpyxl.styles import PatternFill
 from colormap.colors import rgb2hex
 from openpyxl.utils import get_column_letter
 import numpy as np
-from time import time
-
-
-# delete this after creating GUI
-def get_image_name_without_dat(string):
-    res = ''
-    for char in string:
-        if char != '.':
-            res += char
-        else:
-            break
-    return res
 
 
 def rgb_to_hex(rgb_color_list):
@@ -30,7 +18,7 @@ def rgb_to_hex(rgb_color_list):
     return rgb_color_list
 
 
-def image_to_excel_transform(file_name, color_list, width_scale=1):
+def image_to_excel_transform(excel_file_name, color_list, width_scale=1):
     # Creating excel file
     book = openpyxl.Workbook()
     # Select sheet
@@ -43,19 +31,15 @@ def image_to_excel_transform(file_name, color_list, width_scale=1):
             # Coloring cells by coordinates
             sheet.cell(row=rows, column=columns).fill = PatternFill("solid", start_color=color_list[rows][columns])
     # excel file saving in select directory
-    book.save('{}.xlsx'.format(get_image_name_without_dat(file_name)))
+    book.save('{}.xlsx'.format(excel_file_name))
     book.close()
 
 
 def main():
-    ctime = time()
-
     image_name = 'python.jpg'
     image = cv2.imread(image_name)
-    image_hex_list_1 = rgb_to_hex(image)
-    image_to_excel_transform(image_name, image_hex_list_1)
-
-    print('execute time:', time()-ctime)
+    image_hex_list = rgb_to_hex(image)
+    image_to_excel_transform(image_name, image_hex_list)
 
 
 if __name__ == '__main__':
