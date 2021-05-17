@@ -14,10 +14,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(399, 260)
+        MainWindow.setFixedSize(399, 260)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
         MainWindow.setStyleSheet("background-color: rgb(61, 62, 61);")
@@ -80,27 +78,28 @@ class Ui_MainWindow(object):
         font.setPointSize(20)
         self.image_show_label.setFont(font)
         self.image_show_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.image_show_label.setScaledContents(True)
         self.image_show_label.setObjectName("image_show_label")
-        self.transform_buttom = QtWidgets.QPushButton(self.centralwidget)
-        self.transform_buttom.setGeometry(QtCore.QRect(290, 210, 105, 21))
+        self.transform_button = QtWidgets.QPushButton(self.centralwidget)
+        self.transform_button.setGeometry(QtCore.QRect(290, 210, 105, 21))
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
         font.setWeight(75)
-        self.transform_buttom.setFont(font)
-        self.transform_buttom.setStyleSheet("color: rgb(184, 184, 134);background-color: rgb(75, 76, 75);\n"
+        self.transform_button.setFont(font)
+        self.transform_button.setStyleSheet("color: rgb(184, 184, 134);background-color: rgb(75, 76, 75);\n"
 "alternate-background-color: rgb(69, 70, 69);")
-        self.transform_buttom.setObjectName("transform_buttom")
-        self.unpload_buttom = QtWidgets.QPushButton(self.centralwidget)
-        self.unpload_buttom.setGeometry(QtCore.QRect(320, 10, 71, 21))
+        self.transform_button.setObjectName("transform_buttom")
+        self.upload_button = QtWidgets.QPushButton(self.centralwidget)
+        self.upload_button.setGeometry(QtCore.QRect(320, 12, 71, 21))
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
         font.setWeight(75)
-        self.unpload_buttom.setFont(font)
-        self.unpload_buttom.setStyleSheet("color: rgb(184, 184, 134);background-color: rgb(75, 76, 75);\n"
+        self.upload_button.setFont(font)
+        self.upload_button.setStyleSheet("color: rgb(184, 184, 134);background-color: rgb(75, 76, 75);\n"
 "alternate-background-color: rgb(69, 70, 69);")
-        self.unpload_buttom.setObjectName("unpload_buttom")
+        self.upload_button.setObjectName("unpload_buttom")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -117,16 +116,25 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", ".xlsx file name:"))
         self.made_by_label.setText(_translate("MainWindow", "Made by github/KeeGoSenior"))
         self.image_show_label.setText(_translate("MainWindow", "🖼️"))
-        self.transform_buttom.setText(_translate("MainWindow", "Transform"))
-        self.unpload_buttom.setText(_translate("MainWindow", "Upload"))
+        self.transform_button.setText(_translate("MainWindow", "Transform"))
+        self.upload_button.setText(_translate("MainWindow", "Upload"))
 
     def add_functions(self):
-        pass
+        self.upload_button.clicked.connect(self.image_upload)
+        self.transform_button.clicked.connect(self.transform)
 
-    def image_show(self):
-        pass
+    def image_show(self, image_link):
+        pixmap = QtGui.QPixmap(image_link)
+        print('pixmap image:', pixmap)
+        self.image_show_label.setPixmap(pixmap)
 
     def image_upload(self):
+        self.src = self.image_link_Edit.text()
+        print('image src:', self.src)
+        self.image_show(self.src)
+
+    # Func for resizing the label to fit the aspect ratio of the photo
+    def image_label_scale(self):
         pass
 
     def transform(self):
